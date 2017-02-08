@@ -8,5 +8,5 @@ import java.util.Set;
 
 public interface EntityService<T> {
     void addEntity(T entity) throws ServiceException;
-    Set<Book> findEntity(String searchCriterion) throws ServiceException;
+    Set<T> findEntity(T entity) throws ServiceException;
 }

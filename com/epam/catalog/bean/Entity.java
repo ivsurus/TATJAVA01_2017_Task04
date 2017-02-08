@@ -11,6 +11,8 @@ public class Entity {
     private String author;
     private String year;
     private String title;
+    private String searchCriterionName;
+    private String searchCriterionValue;
 
     public String getAuthor(){
         return author;
@@ -40,6 +42,9 @@ public class Entity {
     }
 
 
+
+    /*
+    нужно переопределить с учетом новых полей
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -61,5 +66,6 @@ public class Entity {
         result = 31 * result + (year != null ? year.hashCode() : 0);
         result = 31 * result + (title != null ? title.hashCode() : 0);
         return result;
-    }
+    }*/
+
 }

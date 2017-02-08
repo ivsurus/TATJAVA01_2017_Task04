@@ -15,43 +15,66 @@ public class BookServiceImpl implements EntityService<Book> {
     private DAOFactory daoObjectFactory = DAOFactory.getInstance();
     private EntityDAO<Book> bookDAO = daoObjectFactory.getBookDAO();
 
-    private final String IDENTIFIER_PATTERN = "[bmd]{1,1}";
     private final String TITLE_PATTERN = "[0-9A-Za-zА-Яа-яЁё]{1,30}";
     private final String AUTHOR_PATTERN = "[A-Za-zА-Яа-яЁё-]{1,20}[ ]{0,1}[A-Za-zА-Яа-яЁё-]{0,20}";
     private final String YEAR_PATTERN = "^[12][0-9]{3}$"; //Years from 1000 to 2999
-    private final String DELIMITER = "\\$%\\$";
-    private final String CASE_AUTHOR = "AUTHOR";
-    private final String CASE_TITLE = "TITLE";
-    private final String CASE_YEAR = "YEAR";
-
-    private String[] parameters;
 
 
+    // здесь обязательно валидировать входные параметры
     @Override
     public void addEntity(Book book) throws ServiceException {
-        try {
-            bookDAO.addEntity(book);
-        } catch (DAOException e){
-            throw new ServiceException(e);
+        boolean parametersAreValid = validateParameters(book);
+        if (parametersAreValid) {
+            try {
+                bookDAO.addEntity(book);
+            } catch (DAOException e) {
+                throw new ServiceException(e);
+            }
+        } else {
+            throw new ServiceException("Parameters are not valid");
+            // log
         }
     }
 
+    // здесь обязательно валидировать входные параметры и передать книгу в DAO
     @Override
-    public Set<Book> findEntity(String request) throws ServiceException {
-
-        String searchCriterionValue = findSearchCriterionValue(request);
-        String searchCriterionCategory = findSearchCriterionCategory(request);
+    public Set<Book> findEntity(Book book) throws ServiceException {
+        boolean parametersAreValid = validateParameters(book);
         Set<Book> booksForUser;
-        try{
-            booksForUser = createBooksBooksForUser(bookDAO.findEntity());
-            booksForUser = selectBySearchCriterion(booksForUser, searchCriterionValue, searchCriterionCategory);
-        }catch (DAOException e){
-            throw new ServiceException(e);
+        if (parametersAreValid) {
+            try {
+                booksForUser = bookDAO.findEntity(book);
+            } catch (DAOException e) {
+                throw new ServiceException(e);
+            }
+        } else {
+            throw new ServiceException("Parameters are not valid");
+            //log
         }
         return booksForUser;
    }
 
-   //из строковых данных полученных с БД создаем сет сущностей при условии валидных параметров
+   private boolean validateParameters(Book book){
+       if(!book.getTitle().equals(null)){
+           if(!book.getTitle().matches(TITLE_PATTERN)){
+               return false;
+           }
+       }
+       if(!book.getAuthor().equals(null)){
+           if(!book.getAuthor().matches(AUTHOR_PATTERN)){
+               return false;
+           }
+       }
+       //если дата будет d int то проверять нужно будет на 0
+       if(!book.getYear().equals(null)){
+           if(!book.getYear().matches(YEAR_PATTERN)){
+               return false;
+           }
+       }
+       return true;
+   }
+
+   /*//из строковых данных полученных с БД создаем сет сущностей при условии валидных параметров
    private Set<Book> createBooksBooksForUser (Set <String> books){
        Set<Book> booksForUser = new HashSet<>();
        for (String bookStr: books){
@@ -156,5 +179,5 @@ public class BookServiceImpl implements EntityService<Book> {
             return false;
         }
         return true;
-   }
+   }*/
 }
