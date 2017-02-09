@@ -14,7 +14,7 @@ public class AddMovie implements Command {
     @Override
     public String execute(String request) {
         Movie movie = new Movie();
-        initParameters(movie, request);
+        movie = initParameters(movie, request);
         ServiceFactory serviceObjectFactory = ServiceFactory.getInstance();
         EntityService<Movie> movieService = serviceObjectFactory.getMovieService();
         try{

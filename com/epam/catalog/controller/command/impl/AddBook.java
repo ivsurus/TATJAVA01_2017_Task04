@@ -11,14 +11,10 @@ import com.epam.catalog.service.factory.ServiceFactory;
 public class AddBook implements Command {
 
 
-
     @Override
     public String execute(String request) {
         Book book = new Book();
-        String[] parameters = request.split(ControllerConstants.DELIMITER);
-        book.setTitle(parameters[1]);
-        book.setAuthor(parameters[2]);
-        book.setYear(parameters[3]);
+        book = initParameters(book,request);
         ServiceFactory serviceObjectFactory = ServiceFactory.getInstance();
         EntityService<Book> bookService = serviceObjectFactory.getBookService();
         try{
@@ -27,5 +23,14 @@ public class AddBook implements Command {
             return ControllerConstants.UNSUCCESSFUL_OPERATION;
         }
         return ControllerConstants.SUCCESSFUL_OPERATION;
+    }
+
+
+    private Book initParameters (Book book, String request){
+        String[] parameters = request.split(ControllerConstants.DELIMITER);
+        book.setTitle(parameters[1]);
+        book.setAuthor(parameters[2]);
+        book.setYear(parameters[3]);
+        return book;
     }
 }

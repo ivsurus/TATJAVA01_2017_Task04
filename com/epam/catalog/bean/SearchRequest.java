@@ -5,15 +5,15 @@ import java.io.Serializable;
 
 public class SearchRequest implements Serializable {
 
-    private String searchRequest;
+    private String requestParameters;
 
     public SearchRequest(){}
 
-    public final String getSearchRequest(){
-        return searchRequest;
+    public final String getRequestParameters(){
+        return requestParameters;
     }
-    public final void setSearchRequest(String searchRequest){
-        this.searchRequest = searchRequest;
+    public final void setRequestParameters(String requestParameters){
+        this.requestParameters = requestParameters;
     }
 
     @Override
@@ -23,12 +23,12 @@ public class SearchRequest implements Serializable {
 
         SearchRequest that = (SearchRequest) o;
 
-        return searchRequest != null ? searchRequest.equals(that.searchRequest) : that.searchRequest == null;
+        return requestParameters != null ? requestParameters.equals(that.requestParameters) : that.requestParameters == null;
 
     }
 
     @Override
     public int hashCode() {
-        return searchRequest != null ? searchRequest.hashCode() : 0;
+        return requestParameters != null ? requestParameters.hashCode() : 0;
     }
 }

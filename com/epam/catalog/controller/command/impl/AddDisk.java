@@ -16,10 +16,7 @@ public class AddDisk implements Command{
     @Override
     public String execute(String request) {
         Disk disk = new Disk();
-        String[] parameters = request.split(ControllerConstants.DELIMITER);
-        disk.setTitle(parameters[1]);
-        disk.setAuthor(parameters[2]);
-        disk.setYear(parameters[3]);
+        disk = initParameters(disk, request);
         ServiceFactory serviceObjectFactory = ServiceFactory.getInstance();
         EntityService<Disk> diskService = serviceObjectFactory.getDiskService();
         try{
@@ -28,5 +25,13 @@ public class AddDisk implements Command{
             return ControllerConstants.UNSUCCESSFUL_OPERATION;
         }
         return ControllerConstants.SUCCESSFUL_OPERATION;
+    }
+
+    private Disk initParameters (Disk disk, String request){
+        String[] parameters = request.split(ControllerConstants.DELIMITER);
+        disk.setTitle(parameters[1]);
+        disk.setAuthor(parameters[2]);
+        disk.setYear(parameters[3]);
+        return disk;
     }
 }
