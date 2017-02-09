@@ -3,7 +3,7 @@ package com.epam.catalog.controller.command.impl;
 
 import com.epam.catalog.bean.Movie;
 import com.epam.catalog.bean.SearchRequest;
-import com.epam.catalog.controller.ControllerConstants;
+import com.epam.catalog.controller.util.ControllerConstant;
 import com.epam.catalog.controller.command.Command;
 import com.epam.catalog.service.EntityService;
 import com.epam.catalog.service.exeption.ServiceException;
@@ -24,7 +24,7 @@ public class FindMovie implements Command {
         try{
             movieSet =  movieService.findEntity(searchRequestObject);
         } catch (ServiceException e){
-            return ControllerConstants.UNSUCCESSFUL_OPERATION;
+            return ControllerConstant.UNSUCCESSFUL_OPERATION;
             //log
         }
         return createResponseForUser(movieSet);
@@ -33,9 +33,9 @@ public class FindMovie implements Command {
     private String createResponseForUser(Set<Movie> movieSet){
         StringBuilder builder = new StringBuilder();
         for (Movie movie: movieSet){
-            builder.append(ControllerConstants.TITLE + movie.getTitle()+"\n");
-            builder.append(ControllerConstants.AUTHOR + movie.getAuthor()+"\n");
-            builder.append(ControllerConstants.YEAR + movie.getYear()+"\n\n");
+            builder.append(ControllerConstant.TITLE + movie.getTitle()+"\n");
+            builder.append(ControllerConstant.AUTHOR + movie.getAuthor()+"\n");
+            builder.append(ControllerConstant.YEAR + movie.getYear()+"\n\n");
         }
         return builder.toString();
     }
@@ -45,7 +45,7 @@ public class FindMovie implements Command {
 
     //сделать методом бина или сервисным методом
     private SearchRequest initParameters (SearchRequest searchRequestObject, String request){
-        searchRequestObject.setRequestParameters(request.split(ControllerConstants.DELIMITER,2)[1]);
+        searchRequestObject.setRequestParameters(request.split(ControllerConstant.DELIMITER,2)[1]);
         return searchRequestObject;
     }
 }

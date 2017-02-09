@@ -2,7 +2,7 @@ package com.epam.catalog.controller.command.impl;
 
 
 import com.epam.catalog.bean.Disk;
-import com.epam.catalog.controller.ControllerConstants;
+import com.epam.catalog.controller.util.ControllerConstant;
 import com.epam.catalog.controller.command.Command;
 import com.epam.catalog.service.EntityService;
 import com.epam.catalog.service.exeption.ServiceException;
@@ -22,13 +22,13 @@ public class AddDisk implements Command{
         try{
             diskService.addEntity(disk);
         } catch (ServiceException e){
-            return ControllerConstants.UNSUCCESSFUL_OPERATION;
+            return ControllerConstant.UNSUCCESSFUL_OPERATION;
         }
-        return ControllerConstants.SUCCESSFUL_OPERATION;
+        return ControllerConstant.SUCCESSFUL_OPERATION;
     }
 
     private Disk initParameters (Disk disk, String request){
-        String[] parameters = request.split(ControllerConstants.DELIMITER);
+        String[] parameters = request.split(ControllerConstant.DELIMITER);
         disk.setTitle(parameters[1]);
         disk.setAuthor(parameters[2]);
         disk.setYear(parameters[3]);

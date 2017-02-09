@@ -1,7 +1,7 @@
 package com.epam.catalog.controller.command.impl;
 
 import com.epam.catalog.bean.Book;
-import com.epam.catalog.controller.ControllerConstants;
+import com.epam.catalog.controller.util.ControllerConstant;
 import com.epam.catalog.controller.command.Command;
 import com.epam.catalog.service.EntityService;
 import com.epam.catalog.service.exeption.ServiceException;
@@ -20,14 +20,14 @@ public class AddBook implements Command {
         try{
             bookService.addEntity(book);
         } catch (ServiceException e){
-            return ControllerConstants.UNSUCCESSFUL_OPERATION;
+            return ControllerConstant.UNSUCCESSFUL_OPERATION;
         }
-        return ControllerConstants.SUCCESSFUL_OPERATION;
+        return ControllerConstant.SUCCESSFUL_OPERATION;
     }
 
 
     private Book initParameters (Book book, String request){
-        String[] parameters = request.split(ControllerConstants.DELIMITER);
+        String[] parameters = request.split(ControllerConstant.DELIMITER);
         book.setTitle(parameters[1]);
         book.setAuthor(parameters[2]);
         book.setYear(parameters[3]);

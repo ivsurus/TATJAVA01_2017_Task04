@@ -1,6 +1,7 @@
 package com.epam.catalog.controller;
 
 import com.epam.catalog.controller.command.Command;
+import com.epam.catalog.controller.util.ControllerConstant;
 
 public final class Controller {
 
@@ -9,7 +10,7 @@ public final class Controller {
     public String executeTask(String request){
         String commandName;
         Command executionCommand;
-        commandName = request.substring(0, request.indexOf(ControllerConstants.DELIMITER));
+        commandName = request.substring(0, request.indexOf(ControllerConstant.DELIMITER));
         executionCommand = provider.getCommand(commandName);
         String response;
         response = executionCommand.execute(request);

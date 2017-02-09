@@ -2,7 +2,7 @@ package com.epam.catalog.controller.command.impl;
 
 import com.epam.catalog.bean.Book;
 import com.epam.catalog.bean.SearchRequest;
-import com.epam.catalog.controller.ControllerConstants;
+import com.epam.catalog.controller.util.ControllerConstant;
 import com.epam.catalog.controller.command.Command;
 import com.epam.catalog.service.EntityService;
 import com.epam.catalog.service.exeption.ServiceException;
@@ -25,7 +25,7 @@ public class FindBook implements Command {
         try{
             bookSet =  bookService.findEntity(searchRequestObject);
         } catch (ServiceException e){
-            return ControllerConstants.UNSUCCESSFUL_OPERATION;
+            return ControllerConstant.UNSUCCESSFUL_OPERATION;
             //log
         }
         return createResponseForUser(bookSet);
@@ -34,9 +34,9 @@ public class FindBook implements Command {
     private String createResponseForUser(Set<Book> bookSet){
         StringBuilder builder = new StringBuilder();
         for (Book book: bookSet){
-            builder.append(ControllerConstants.TITLE + book.getTitle()+"\n");
-            builder.append(ControllerConstants.AUTHOR + book.getAuthor()+"\n");
-            builder.append(ControllerConstants.YEAR + book.getYear()+"\n\n");
+            builder.append(ControllerConstant.TITLE + book.getTitle()+"\n");
+            builder.append(ControllerConstant.AUTHOR + book.getAuthor()+"\n");
+            builder.append(ControllerConstant.YEAR + book.getYear()+"\n\n");
         }
         return builder.toString();
     }
@@ -45,7 +45,7 @@ public class FindBook implements Command {
     //author$%$pushkin                - request parameters
     //сделать методом бина или сервисным методом
     private SearchRequest initParameters (SearchRequest searchRequestObject, String request){
-        searchRequestObject.setRequestParameters(request.split(ControllerConstants.DELIMITER,2)[1]);
+        searchRequestObject.setRequestParameters(request.split(ControllerConstant.DELIMITER,2)[1]);
         return searchRequestObject;
     }
 

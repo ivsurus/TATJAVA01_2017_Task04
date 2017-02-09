@@ -1,7 +1,7 @@
-package com.epam.catalog.controller;
+package com.epam.catalog.controller.util;
 
 
-public final class ControllerConstants {
+public final class ControllerConstant {
 
     public final static String DELIMITER = "$%$";
     public final static String SUCCESSFUL_OPERATION = " News is successfully added to the catalog";

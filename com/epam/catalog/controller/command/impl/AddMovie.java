@@ -2,7 +2,7 @@ package com.epam.catalog.controller.command.impl;
 
 
 import com.epam.catalog.bean.Movie;
-import com.epam.catalog.controller.ControllerConstants;
+import com.epam.catalog.controller.util.ControllerConstant;
 import com.epam.catalog.controller.command.Command;
 import com.epam.catalog.service.EntityService;
 import com.epam.catalog.service.exeption.ServiceException;
@@ -20,13 +20,13 @@ public class AddMovie implements Command {
         try{
             movieService.addEntity(movie);
         } catch (ServiceException e){
-            return ControllerConstants.UNSUCCESSFUL_OPERATION;
+            return ControllerConstant.UNSUCCESSFUL_OPERATION;
         }
-        return ControllerConstants.SUCCESSFUL_OPERATION;
+        return ControllerConstant.SUCCESSFUL_OPERATION;
     }
 
     private Movie initParameters (Movie movie, String request){
-        String[] parameters = request.split(ControllerConstants.DELIMITER);
+        String[] parameters = request.split(ControllerConstant.DELIMITER);
         movie.setTitle(parameters[1]);
         movie.setAuthor(parameters[2]);
         movie.setYear(parameters[3]);

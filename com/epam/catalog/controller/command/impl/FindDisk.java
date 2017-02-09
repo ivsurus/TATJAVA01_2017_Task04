@@ -3,7 +3,7 @@ package com.epam.catalog.controller.command.impl;
 
 import com.epam.catalog.bean.Disk;
 import com.epam.catalog.bean.SearchRequest;
-import com.epam.catalog.controller.ControllerConstants;
+import com.epam.catalog.controller.util.ControllerConstant;
 import com.epam.catalog.controller.command.Command;
 import com.epam.catalog.service.EntityService;
 import com.epam.catalog.service.exeption.ServiceException;
@@ -24,7 +24,7 @@ public class FindDisk implements Command{
         try{
            diskSet =  diskService.findEntity(searchRequestObject);
         } catch (ServiceException e){
-            return ControllerConstants.UNSUCCESSFUL_OPERATION;
+            return ControllerConstant.UNSUCCESSFUL_OPERATION;
             //log
         }
         return createResponseForUser(diskSet);
@@ -33,9 +33,9 @@ public class FindDisk implements Command{
     private String createResponseForUser(Set<Disk> diskSet){
         StringBuilder builder = new StringBuilder();
         for (Disk disk: diskSet){
-            builder.append(ControllerConstants.TITLE + disk.getTitle()+"\n");
-            builder.append(ControllerConstants.AUTHOR + disk.getAuthor()+"\n");
-            builder.append(ControllerConstants.YEAR + disk.getYear()+"\n\n");
+            builder.append(ControllerConstant.TITLE + disk.getTitle()+"\n");
+            builder.append(ControllerConstant.AUTHOR + disk.getAuthor()+"\n");
+            builder.append(ControllerConstant.YEAR + disk.getYear()+"\n\n");
         }
         return builder.toString();
     }
@@ -44,7 +44,7 @@ public class FindDisk implements Command{
     //author$%$pushkin                - request parameters
     //сделать методом бина или сервисным методом
     private SearchRequest initParameters (SearchRequest searchRequestObject, String request){
-        searchRequestObject.setRequestParameters(request.split(ControllerConstants.DELIMITER,2)[1]);
+        searchRequestObject.setRequestParameters(request.split(ControllerConstant.DELIMITER,2)[1]);
         return searchRequestObject;
     }
 }

@@ -1,44 +1,39 @@
 package com.epam.catalog.service.impl;
 
 import com.epam.catalog.bean.Book;
+import com.epam.catalog.bean.SearchRequest;
 import com.epam.catalog.dao.EntityDAO;
 import com.epam.catalog.dao.exeption.DAOException;
 import com.epam.catalog.dao.factory.DAOFactory;
 import com.epam.catalog.service.EntityService;
 import com.epam.catalog.service.exeption.ServiceException;
+import com.epam.catalog.service.util.ServiceConstant;
 
 import java.util.*;
 
 public class BookServiceImpl implements EntityService<Book> {
 
 
-    private DAOFactory daoObjectFactory = DAOFactory.getInstance();
-    private EntityDAO<Book> bookDAO = daoObjectFactory.getBookDAO();
-
-    private final String TITLE_PATTERN = "[0-9A-Za-zА-Яа-яЁё]{1,30}";
-    private final String AUTHOR_PATTERN = "[A-Za-zА-Яа-яЁё-]{1,20}[ ]{0,1}[A-Za-zА-Яа-яЁё-]{0,20}";
-    private final String YEAR_PATTERN = "^[12][0-9]{3}$"; //Years from 1000 to 2999
-
-
-    // здесь обязательно валидировать входные параметры
     @Override
     public void addEntity(Book book) throws ServiceException {
-        boolean parametersAreValid = validateParameters(book);
+        boolean parametersAreValid = validateEntityParamenters(book);
         if (parametersAreValid) {
+            DAOFactory daoObjectFactory = DAOFactory.getInstance();
+            EntityDAO<Book> bookDAO = daoObjectFactory.getBookDAO();
             try {
                 bookDAO.addEntity(book);
             } catch (DAOException e) {
                 throw new ServiceException(e);
             }
         } else {
-            throw new ServiceException("Parameters are not valid");
+            throw new ServiceException(ServiceConstant.INVALID_PARAMETERS); //тут хорошо подумать
             // log
         }
     }
 
     // здесь обязательно валидировать входные параметры и передать книгу в DAO
     @Override
-    public Set<Book> findEntity(Book book) throws ServiceException {
+    public Set<Book> findEntity(SearchRequest searchRequestObject) throws ServiceException {
         boolean parametersAreValid = validateParameters(book);
         Set<Book> booksForUser;
         if (parametersAreValid) {
@@ -54,7 +49,36 @@ public class BookServiceImpl implements EntityService<Book> {
         return booksForUser;
    }
 
-   private boolean validateParameters(Book book){
+   //проверить на null
+   private boolean validateEntityParamenters (Book book){
+        return book.getAuthor().matches(ServiceConstant.AUTHOR_PATTERN) &&
+                book.getTitle().matches(ServiceConstant.TITLE_PATTERN) &&
+                book.getYear().matches(ServiceConstant.YEAR_PATTERN);
+   }
+
+    //author$%$pushkin                - request parameters
+   private boolean validateSearchRequestParamenters (SearchRequest searchRequestObject){
+       String parameterName = searchRequestObject.getRequestParameters()
+                                .split(ServiceConstant.DELIMITER,2)[0];
+       String parameterValue = searchRequestObject.getRequestParameters()
+                                .split(ServiceConstant.DELIMITER,2)[1];
+       return true;
+
+
+       
+   }
+   /* private boolean validate (String pa){
+        String parameterName = searchRequestObject.getRequestParameters()
+                .split(ServiceConstant.DELIMITER,2)[0];
+        String parameterValue = searchRequestObject.getRequestParameters()
+                .split(ServiceConstant.DELIMITER,2)[1];
+        return true;
+    }*/
+
+
+
+
+   /*private boolean validateParameters(Book book){
        if(!book.getTitle().equals(null)){
            if(!book.getTitle().matches(TITLE_PATTERN)){
                return false;
@@ -72,7 +96,7 @@ public class BookServiceImpl implements EntityService<Book> {
            }
        }
        return true;
-   }
+   }*/
 
    /*//из строковых данных полученных с БД создаем сет сущностей при условии валидных параметров
    private Set<Book> createBooksBooksForUser (Set <String> books){
