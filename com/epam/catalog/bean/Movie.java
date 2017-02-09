@@ -1,6 +1,8 @@
 package com.epam.catalog.bean;
 
 
-public class Movie extends Entity {
+import java.io.Serializable;
+
+public class Movie extends Entity implements Serializable{
     public Movie(){}
 }

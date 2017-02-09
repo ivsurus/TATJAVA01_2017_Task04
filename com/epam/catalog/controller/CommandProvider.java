@@ -5,7 +5,7 @@ import com.epam.catalog.controller.command.impl.*;
 import java.util.HashMap;
 import java.util.Map;
 
-final public class CommandProvider {
+ public final class CommandProvider {
 
     private final Map<CommandName, Command> repository = new HashMap<>();
 

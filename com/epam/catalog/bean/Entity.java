@@ -3,48 +3,45 @@ package com.epam.catalog.bean;
 
 import com.epam.catalog.bean.category.CategoryName;
 
-public class Entity {
+import java.io.Serializable;
 
-    public Entity(){}
+public class Entity implements Serializable{
+
 
     private CategoryName category;
     private String author;
     private String year;
     private String title;
-    private String searchCriterionName;
-    private String searchCriterionValue;
 
-    public String getAuthor(){
+    public Entity() {}
+
+    public final String getAuthor(){
         return author;
     }
-    public String getTitle(){
+    public final String getTitle(){
         return title;
     }
-    public String getYear(){
+    public final String getYear(){
         return year;
     }
-    public CategoryName getCategory(){
+    public final CategoryName getCategory(){
         return category;
     }
 
-    public void setCategory(CategoryName category){
+    public final void setCategory(CategoryName category){
         this.category = category;
     }
-
-    public void setTitle(String title){
+    public final void setTitle(String title){
         this.title = title;
     }
-    public void setAuthor(String author){
+    public final void setAuthor(String author){
         this.author = author;
     }
-    public void setYear(String year){
+    public final void setYear(String year){
         this.year = year;
     }
 
 
-
-    /*
-    нужно переопределить с учетом новых полей
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -66,6 +63,5 @@ public class Entity {
         result = 31 * result + (year != null ? year.hashCode() : 0);
         result = 31 * result + (title != null ? title.hashCode() : 0);
         return result;
-    }*/
-
+    }
 }

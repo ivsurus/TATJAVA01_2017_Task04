@@ -1,6 +1,8 @@
 package com.epam.catalog.bean;
 
 
-public class Disk extends Entity {
+import java.io.Serializable;
+
+public class Disk  extends Entity implements Serializable{
     public Disk(){}
 }
