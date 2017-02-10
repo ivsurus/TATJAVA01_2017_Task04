@@ -5,6 +5,7 @@ import com.epam.catalog.bean.SearchRequest;
 import com.epam.catalog.dao.EntityDAO;
 import com.epam.catalog.dao.exeption.DAOException;
 import com.epam.catalog.dao.tools.DataBaseTools;
+import com.epam.catalog.dao.util.DAOConstant;
 import com.epam.catalog.dao.util.DBWorker;
 import java.sql.SQLException;
 import java.util.Set;
@@ -42,8 +43,12 @@ public class TxtBookDAO implements EntityDAO<Book> {
     }
 
     //сделаем перегрузочку
+    //author$%$pushkin                - request parameters
     private String getQuery(SearchRequest searchRequestObject){
-        String query = "";
+        String request = searchRequestObject.getRequestParameters();
+        String parameterName = request.split(DAOConstant.DELIMITER)[0];
+        String parameterValue = request.split(DAOConstant.DELIMITER)[1];
+        String query = "SELECT * FROM book WHERE" + parameterName + "=" +parameterValue;
         return query;
     }
 
