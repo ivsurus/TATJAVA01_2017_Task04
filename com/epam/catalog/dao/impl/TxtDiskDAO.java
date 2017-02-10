@@ -2,6 +2,7 @@ package com.epam.catalog.dao.impl;
 
 
 import com.epam.catalog.bean.Disk;
+import com.epam.catalog.bean.SearchRequest;
 import com.epam.catalog.dao.EntityDAO;
 import com.epam.catalog.dao.exeption.DAOException;
 import com.epam.catalog.dao.tools.DataBaseTools;
@@ -27,7 +28,7 @@ public class TxtDiskDAO implements EntityDAO<Disk>{
     }
 
     @Override
-    public Set<String> findEntity() throws DAOException{
+    public Set<Disk> findEntity(SearchRequest searchRequestObject) throws DAOException{
         try {
             return dbTools.delUnnecessaryData(dbTools.readFromDB(), IDENTIFIER);
         } catch (IOException e){

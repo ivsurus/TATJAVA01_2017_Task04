@@ -2,6 +2,7 @@ package com.epam.catalog.service.impl;
 
 import com.epam.catalog.bean.Book;
 import com.epam.catalog.bean.Movie;
+import com.epam.catalog.bean.SearchRequest;
 import com.epam.catalog.dao.EntityDAO;
 import com.epam.catalog.dao.exeption.DAOException;
 import com.epam.catalog.dao.factory.DAOFactory;
@@ -21,11 +22,10 @@ public class MovieServiceImpl implements EntityService<Movie> {
         } catch (DAOException e){
             throw new ServiceException(e);
         }
-
     }
 
     @Override
-    public Set<Book> findEntity(String searchCriterion) throws ServiceException {
+    public Set<Movie> findEntity(SearchRequest searchRequestObject) throws ServiceException {
         return null;
     }
 

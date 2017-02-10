@@ -16,9 +16,10 @@ public class ConsoleMenu {
     private final String MESSAGE_3 = "Enter a title:";
     private final String MESSAGE_4 = "Enter an author :";
     private final String MESSAGE_5 = "Enter a year:";
-    private final String MESSAGE_6 = "Enter a criterion for a search:";
-    private final String DELIMITER = "_";
-    private final String PARAM_DELIMITER = "$%$";
+    private final String MESSAGE_6 = "Enter a criterion for a search: (author title year)";
+    private final String MESSAGE_7 = "Enter a parameterValue: ";
+    private final String COMMAND_DELIMITER = "_";
+    private final String DELIMITER = "%_%";
     private final String TITLE = "TITLE";
     private final String AUTHOR = "AUTHOR";
     private final String YEAR = "YEAR";
@@ -39,41 +40,45 @@ public class ConsoleMenu {
         builder = new StringBuilder();
         System.out.println(MESSAGE_1);
         builder.append(readUserInput());
-        builder.append(DELIMITER);
+        builder.append(COMMAND_DELIMITER);
         System.out.println(MESSAGE_2);
         builder.append(readUserInput());
-        builder.append(PARAM_DELIMITER);
+        builder.append(DELIMITER);
         System.out.println(MESSAGE_3);
         builder.append(readUserInput());
-        builder.append(PARAM_DELIMITER);
+        builder.append(DELIMITER);
         System.out.println(MESSAGE_4);
         builder.append(readUserInput());
-        builder.append(PARAM_DELIMITER);
+        builder.append(DELIMITER);
         System.out.println(MESSAGE_5);
         builder.append(readUserInput());
         return builder.toString();
     }
+
     private String readUserEntityToFind(){
         builder = new StringBuilder();
         System.out.println(MESSAGE_1);
         builder.append(readUserInput());
-        builder.append(DELIMITER);
+        builder.append(COMMAND_DELIMITER);
         System.out.println(MESSAGE_2);
         builder.append(readUserInput());
-        builder.append(PARAM_DELIMITER);
+        builder.append(DELIMITER);
         System.out.println(MESSAGE_6);
         builder.append(readUserInput());
-        builder.append(PARAM_DELIMITER);
-        builder.append(YEAR);
+        builder.append(DELIMITER);
+        System.out.println(MESSAGE_7);
+        builder.append(readUserInput());
+        System.out.println(builder.toString());
         return builder.toString();
     }
 
 
 
+    //работаем только в upperCase
     private String readUserInput(){
        String input = "";
         try {
-            input = reader.readLine();
+            input = reader.readLine().toUpperCase();
         } catch (IOException e) {
             System.out.println(e);
         }

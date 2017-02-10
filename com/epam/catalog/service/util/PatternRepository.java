@@ -24,4 +24,4 @@ public final class PatternRepository {
             return patternRepository;
         }
 
-}
+    }

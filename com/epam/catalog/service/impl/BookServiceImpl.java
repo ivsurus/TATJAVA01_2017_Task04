@@ -5,6 +5,7 @@ import com.epam.catalog.bean.SearchRequest;
 import com.epam.catalog.dao.EntityDAO;
 import com.epam.catalog.dao.exeption.DAOException;
 import com.epam.catalog.dao.factory.DAOFactory;
+import com.epam.catalog.service.EntityParameterName;
 import com.epam.catalog.service.EntityService;
 import com.epam.catalog.service.exeption.ServiceException;
 import com.epam.catalog.service.util.PatternRepository;
@@ -17,7 +18,7 @@ public class BookServiceImpl implements EntityService<Book> {
 
     @Override
     public void addEntity(Book book) throws ServiceException {
-        boolean parametersAreValid = validateEntityParamenters(book);
+        boolean parametersAreValid = validateEntityParameters(book);
         if (parametersAreValid) {
             DAOFactory daoObjectFactory = DAOFactory.getInstance();
             EntityDAO<Book> bookDAO = daoObjectFactory.getBookDAO();
@@ -35,7 +36,7 @@ public class BookServiceImpl implements EntityService<Book> {
 
     @Override
     public Set<Book> findEntity(SearchRequest searchRequestObject) throws ServiceException {
-        boolean parametersAreValid = validateSearchRequestParamenters(searchRequestObject);
+        boolean parametersAreValid = validateSearchRequestParameters(searchRequestObject);
         Set<Book> bookSet;
         if (parametersAreValid) {
             DAOFactory daoObjectFactory = DAOFactory.getInstance();
@@ -54,14 +55,14 @@ public class BookServiceImpl implements EntityService<Book> {
 
    //проверить на null
    // попробовать передалать в цикле
-   private boolean validateEntityParamenters (Book book){
+   private boolean validateEntityParameters(Book book){
         return book.getAuthor().matches(ServiceConstant.AUTHOR_PATTERN) &&
                 book.getTitle().matches(ServiceConstant.TITLE_PATTERN) &&
                 book.getYear().matches(ServiceConstant.YEAR_PATTERN);
    }
 
         //author$%$pushkin                - request parameters
-       private boolean validateSearchRequestParamenters (SearchRequest searchRequestObject){
+       private boolean validateSearchRequestParameters(SearchRequest searchRequestObject){
        String parameterName = searchRequestObject.getRequestParameters()
                                 .split(ServiceConstant.DELIMITER,2)[0];
        String parameterValue = searchRequestObject.getRequestParameters()
@@ -71,9 +72,15 @@ public class BookServiceImpl implements EntityService<Book> {
 
 
     private boolean validate (String parameterName, String parameterValue){
+        String pattern = getPattern(parameterName);
+        return parameterValue.matches(pattern);
+    }
+
+    private String getPattern (String parameterName){
         PatternRepository PatternRepositoryObject = PatternRepository.getInstance();
-        Map patternRepository = PatternRepositoryObject.getPatternRepository();
-        return parameterValue.matches((String)patternRepository.get(parameterName));
+        Map<Enumeration, String> patternRepository = PatternRepositoryObject.getPatternRepository();
+        String pattern = patternRepository.get(EntityParameterName.valueOf(parameterName));
+        return pattern;
     }
 
 }

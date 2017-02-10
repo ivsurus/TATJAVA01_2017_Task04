@@ -20,7 +20,9 @@ public class FindBook implements Command {
         ServiceFactory serviceObjectFactory = ServiceFactory.getInstance();
         EntityService<Book> bookService = serviceObjectFactory.getBookService();
         SearchRequest searchRequestObject = new SearchRequest();
+        System.out.println(1111111111);
         searchRequestObject = initParameters(searchRequestObject,request);
+        System.out.println(222222222);
         Set bookSet;
         try{
             bookSet =  bookService.findEntity(searchRequestObject);
