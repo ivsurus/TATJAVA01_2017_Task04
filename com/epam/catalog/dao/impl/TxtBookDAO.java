@@ -21,14 +21,13 @@ public class TxtBookDAO implements EntityDAO<Book> {
 
     @Override
     public void addEntity(Book book) throws DAOException {
-       /* DBWorker dataBase = DBWorker.getInstance();
-      //  String query = "Select * from table";
+        DBWorker dataBase = DBWorker.getInstance();
         try {
-           // dataBase.changeDBData(query);
+            dataBase.writeDataToDB(book);
         } catch (ClassNotFoundException | IllegalAccessException |
                 InstantiationException | SQLException e) {
             throw new DAOException();
-        }*/
+        }
     }
 
     @Override
@@ -37,7 +36,7 @@ public class TxtBookDAO implements EntityDAO<Book> {
         String query = getQuery(searchRequestObject);
         ResultSet resultSet;
         try {
-            resultSet =  dataBase.getDBData(query);
+            resultSet =  dataBase.getDataFromDB(query);
             return createBookSet(resultSet);
         } catch (ClassNotFoundException | IllegalAccessException |
                 InstantiationException | SQLException e) {
@@ -66,7 +65,7 @@ public class TxtBookDAO implements EntityDAO<Book> {
         String year = book.getYear();
         int id = 5;
         String query = DAOConstant.INSERT_INTO_BOOK_TABLE + DAOConstant.SINGLE_QUOTE +
-                id + DAOConstant.SINGLE_QUOTE + book.getTitle() + DA;
+                id + DAOConstant.SINGLE_QUOTE + book.getTitle() ;
         return query;
     }
 

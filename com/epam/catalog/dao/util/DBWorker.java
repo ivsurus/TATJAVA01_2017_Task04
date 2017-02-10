@@ -23,7 +23,7 @@ public class DBWorker {
 
 
     // Выполнение запросов на выборку данных.
-    public ResultSet getDBData(String query) throws ClassNotFoundException, IllegalAccessException,
+    public ResultSet getDataFromDB(String query) throws ClassNotFoundException, IllegalAccessException,
                                                     InstantiationException, SQLException {
         Statement statement;
         Connection connect;
@@ -36,7 +36,7 @@ public class DBWorker {
     }
 
     // Выполнение запросов на модификацию данных.
-    public Integer changeDBData(String query) throws ClassNotFoundException, IllegalAccessException,
+    public Integer writeDataToDB(String query) throws ClassNotFoundException, IllegalAccessException,
                                                      InstantiationException, SQLException {
         Statement statement;
         Connection connect;

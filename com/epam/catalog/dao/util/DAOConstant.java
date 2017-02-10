@@ -8,6 +8,7 @@ public class DAOConstant {
     public final static String DB_PASSWORD = "root";
     public final static String DB_USERNAME = "root";
     public final static String SELECT_FROM_BOOK_TABLE = "SELECT DISTINCT * FROM book WHERE ";
+    public final static String PREPARED_INSERT_INTO_BOOK_TABLE = "INSERT INTO 'book' VALUES (?,?,?,?)";
     public final static String INSERT_INTO_BOOK_TABLE = "INSERT INTO 'book' VALUES ";
     public final static String EQUALS_SIGN = " = ";
     public final static String SINGLE_QUOTE = "'";
