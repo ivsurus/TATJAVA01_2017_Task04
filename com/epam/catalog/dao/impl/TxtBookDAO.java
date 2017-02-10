@@ -1,14 +1,12 @@
 package com.epam.catalog.dao.impl;
 
-
-
 import com.epam.catalog.bean.Book;
 import com.epam.catalog.bean.SearchRequest;
 import com.epam.catalog.dao.EntityDAO;
-import com.epam.catalog.dao.example_db.ConnectToDBExample;
 import com.epam.catalog.dao.exeption.DAOException;
 import com.epam.catalog.dao.tools.DataBaseTools;
-import java.io.IOException;
+import com.epam.catalog.dao.util.DBWorker;
+import java.sql.SQLException;
 import java.util.Set;
 
 
@@ -19,31 +17,40 @@ public class TxtBookDAO implements EntityDAO<Book> {
 
     @Override
     public void addEntity(Book book) throws DAOException {
-       /* try {
-            dbTools.writeToDB(IDENTIFIER+DELIMITER+book.getTitle()+DELIMITER+book.getAuthor()
-                                +DELIMITER+book.getYear()+"\n");
-        } catch (IOException e){
-            throw new DAOException(e);
-        }*/
+        DBWorker dataBase = DBWorker.getInstance();
+        String query = "Select * from table";
+        try {
+            dataBase.changeDBData(query);
+        } catch (ClassNotFoundException | IllegalAccessException |
+                InstantiationException | SQLException e) {
+            throw new DAOException();
+        }
     }
+
 
     @Override
     public Set<Book> findEntity(SearchRequest searchRequestObject) throws DAOException {
-        //должен быть singlton
-        ConnectToDBExample db = new ConnectToDBExample();
-        db.setColumn();
-        db.setTable();
-        db.setValue();
-        db.getRs();
-        /*try {
-            return dbTools.delUnnecessaryData(dbTools.readFromDB(), IDENTIFIER);
-        } catch (IOException e){
-            throw new DAOException(e);
-        }*/
+        DBWorker dataBase = DBWorker.getInstance();
+        String query = "Select * from table";
+        try {
+            dataBase.getDBData(query);
+        } catch (ClassNotFoundException | IllegalAccessException |
+                InstantiationException | SQLException e) {
+            throw new DAOException();
+        }
         return null;
     }
 
+    //сделаем перегрузочку
+    private String getQuery(SearchRequest searchRequestObject){
+        String query = "";
+        return query;
+    }
 
+    private String getQuery(Book book){
+        String query = "";
+        return query;
+    }
 
 }
 
