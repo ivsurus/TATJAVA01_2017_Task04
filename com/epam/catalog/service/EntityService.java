@@ -1,6 +1,5 @@
 package com.epam.catalog.service;
 
-import com.epam.catalog.bean.Book;
 import com.epam.catalog.bean.SearchRequest;
 import com.epam.catalog.service.exeption.ServiceException;
 

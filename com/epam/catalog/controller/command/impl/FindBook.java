@@ -20,9 +20,7 @@ public class FindBook implements Command {
         ServiceFactory serviceObjectFactory = ServiceFactory.getInstance();
         EntityService<Book> bookService = serviceObjectFactory.getBookService();
         SearchRequest searchRequestObject = new SearchRequest();
-        System.out.println(1111111111);
         searchRequestObject = initParameters(searchRequestObject,request);
-        System.out.println(222222222);
         Set bookSet;
         try{
             bookSet =  bookService.findEntity(searchRequestObject);
@@ -36,8 +34,9 @@ public class FindBook implements Command {
     private String createResponseForUser(Set<Book> bookSet){
         StringBuilder builder = new StringBuilder();
         for (Book book: bookSet){
-            builder.append(ControllerConstant.TITLE + book.getTitle()+"\n");
             builder.append(ControllerConstant.AUTHOR + book.getAuthor()+"\n");
+            builder.append(ControllerConstant.TITLE + book.getTitle()+"\n");
+            builder.append(ControllerConstant.GENRE + book.getGenre()+"\n");
             builder.append(ControllerConstant.YEAR + book.getYear()+"\n\n");
         }
         return builder.toString();

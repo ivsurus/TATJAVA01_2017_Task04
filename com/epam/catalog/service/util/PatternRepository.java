@@ -14,6 +14,9 @@ public final class PatternRepository {
             patternRepository.put(EntityParameterName.TITLE, ServiceConstant.TITLE_PATTERN);
             patternRepository.put(EntityParameterName.AUTHOR, ServiceConstant.AUTHOR_PATTERN);
             patternRepository.put(EntityParameterName.YEAR, ServiceConstant.YEAR_PATTERN);
+            patternRepository.put(EntityParameterName.GENRE, ServiceConstant.GENRE_PATTERN);
+            patternRepository.put(EntityParameterName.PRODUCER, ServiceConstant.PRODUCER_PATTERN);
+            patternRepository.put(EntityParameterName.PRICE, ServiceConstant.PRICE_PATTERN);
         }
 
         public static PatternRepository getInstance(){

@@ -33,8 +33,9 @@ public class FindDisk implements Command{
     private String createResponseForUser(Set<Disk> diskSet){
         StringBuilder builder = new StringBuilder();
         for (Disk disk: diskSet){
+            builder.append(ControllerConstant.PRICE + disk.getPrice()+"\n");
             builder.append(ControllerConstant.TITLE + disk.getTitle()+"\n");
-            builder.append(ControllerConstant.AUTHOR + disk.getAuthor()+"\n");
+            builder.append(ControllerConstant.GENRE + disk.getGenre()+"\n");
             builder.append(ControllerConstant.YEAR + disk.getYear()+"\n\n");
         }
         return builder.toString();

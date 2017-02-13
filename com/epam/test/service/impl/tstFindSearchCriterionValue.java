@@ -1,3 +1,4 @@
+/*
 package com.epam.test.service.impl;
 
 
@@ -57,3 +58,4 @@ public class tstFindSearchCriterionValue {
         }
     }
 }
+*/

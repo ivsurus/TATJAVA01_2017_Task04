@@ -27,9 +27,10 @@ public class AddMovie implements Command {
 
     private Movie initParameters (Movie movie, String request){
         String[] parameters = request.split(ControllerConstant.DELIMITER);
-        movie.setTitle(parameters[1]);
-        movie.setAuthor(parameters[2]);
-        movie.setYear(parameters[3]);
+        movie.setProducer(parameters[1]);
+        movie.setTitle(parameters[2]);
+        movie.setGenre(parameters[3]);
+        movie.setYear(parameters[4]);
         return movie;
     }
 

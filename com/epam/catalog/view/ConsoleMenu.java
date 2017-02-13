@@ -13,9 +13,10 @@ public class ConsoleMenu {
 
     private final String MESSAGE_1 = "Enter a command: (add find)";
     private final String MESSAGE_2 = "Enter a category: (book disk movie)";
-    private final String MESSAGE_3 = "Enter a title:";
-    private final String MESSAGE_4 = "Enter an author :";
-    private final String MESSAGE_5 = "Enter a year:";
+    private final String MESSAGE_3 = "Enter an author:";
+    private final String MESSAGE_4 = "Enter a title :";
+    private final String MESSAGE_5 = "Enter a genre:";
+    private final String MESSAGE_5_5 = "Enter a year:";
     private final String MESSAGE_6 = "Enter a criterion for a search: (author title year)";
     private final String MESSAGE_7 = "Enter a parameterValue: ";
     private final String COMMAND_DELIMITER = "_";
@@ -32,8 +33,8 @@ public class ConsoleMenu {
 
     public void start(){
 
-      //  System.out.println(controller.executeTask(readUserEntityToAdd()));
-        System.out.println(controller.executeTask(readUserEntityToFind()));
+        System.out.println(controller.executeTask(readUserEntityToAdd()));
+       //System.out.println(controller.executeTask(readUserEntityToFind()));
     }
 
     private String readUserEntityToAdd(){
@@ -52,7 +53,11 @@ public class ConsoleMenu {
         builder.append(DELIMITER);
         System.out.println(MESSAGE_5);
         builder.append(readUserInput());
+        builder.append(DELIMITER);
+        System.out.println(MESSAGE_5_5);
+        builder.append(readUserInput());
         return builder.toString();
+
     }
 
     private String readUserEntityToFind(){

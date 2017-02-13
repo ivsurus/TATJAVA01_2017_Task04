@@ -1,6 +1,7 @@
+/*
 package com.epam.test.dao.tools;
 
-import com.epam.catalog.dao.tools.DataBaseTools;
+import com.epam.catalog.dao.util.DataBaseTools;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -55,3 +56,4 @@ public class tstDelUnnecessaryData {
     }
 
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package com.epam.catalog.dao.util;
 
 import com.epam.catalog.dao.exeption.DAOException;
@@ -60,3 +61,4 @@ public class DBWorker {
 
 
 }
+*/

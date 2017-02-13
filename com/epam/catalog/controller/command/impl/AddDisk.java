@@ -29,9 +29,10 @@ public class AddDisk implements Command{
 
     private Disk initParameters (Disk disk, String request){
         String[] parameters = request.split(ControllerConstant.DELIMITER);
-        disk.setTitle(parameters[1]);
-        disk.setAuthor(parameters[2]);
-        disk.setYear(parameters[3]);
+        disk.setPrice(parameters[1]);
+        disk.setTitle(parameters[2]);
+        disk.setGenre(parameters[3]);
+        disk.setYear(parameters[4]);
         return disk;
     }
 }

@@ -33,8 +33,9 @@ public class FindMovie implements Command {
     private String createResponseForUser(Set<Movie> movieSet){
         StringBuilder builder = new StringBuilder();
         for (Movie movie: movieSet){
+            builder.append(ControllerConstant.PRODUCER + movie.getProducer()+"\n");
             builder.append(ControllerConstant.TITLE + movie.getTitle()+"\n");
-            builder.append(ControllerConstant.AUTHOR + movie.getAuthor()+"\n");
+            builder.append(ControllerConstant.GENRE + movie.getGenre()+"\n");
             builder.append(ControllerConstant.YEAR + movie.getYear()+"\n\n");
         }
         return builder.toString();

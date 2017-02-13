@@ -27,10 +27,12 @@ public class AddBook implements Command {
 
 
     private Book initParameters (Book book, String request){
+        System.out.println(request);
         String[] parameters = request.split(ControllerConstant.DELIMITER);
-        book.setTitle(parameters[1]);
-        book.setAuthor(parameters[2]);
-        book.setYear(parameters[3]);
+        book.setAuthor(parameters[1]);
+        book.setTitle(parameters[2]);
+        book.setGenre(parameters[3]);
+        book.setYear(parameters[4]);
         return book;
     }
 }

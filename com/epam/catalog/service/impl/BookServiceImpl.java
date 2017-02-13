@@ -5,11 +5,10 @@ import com.epam.catalog.bean.SearchRequest;
 import com.epam.catalog.dao.EntityDAO;
 import com.epam.catalog.dao.exeption.DAOException;
 import com.epam.catalog.dao.factory.DAOFactory;
-import com.epam.catalog.service.EntityParameterName;
 import com.epam.catalog.service.EntityService;
 import com.epam.catalog.service.exeption.ServiceException;
-import com.epam.catalog.service.util.PatternRepository;
 import com.epam.catalog.service.util.ServiceConstant;
+import com.epam.catalog.service.util.ServiceTool;
 
 import java.util.*;
 
@@ -18,7 +17,7 @@ public class BookServiceImpl implements EntityService<Book> {
 
     @Override
     public void addEntity(Book book) throws ServiceException {
-        boolean parametersAreValid = validateEntityParameters(book);
+        boolean parametersAreValid = ServiceTool.validateEntityParameters(book);
         if (parametersAreValid) {
             DAOFactory daoObjectFactory = DAOFactory.getInstance();
             EntityDAO<Book> bookDAO = daoObjectFactory.getBookDAO();
@@ -28,15 +27,14 @@ public class BookServiceImpl implements EntityService<Book> {
                 throw new ServiceException(e);
             }
         } else {
-            throw new ServiceException(ServiceConstant.INVALID_PARAMETERS); //тут хорошо подумать
+            throw new ServiceException(ServiceConstant.INVALID_PARAMETERS);
             // log
         }
     }
 
-
     @Override
     public Set<Book> findEntity(SearchRequest searchRequestObject) throws ServiceException {
-        boolean parametersAreValid = validateSearchRequestParameters(searchRequestObject);
+        boolean parametersAreValid = ServiceTool.validateSearchRequestParameters(searchRequestObject);
         Set<Book> bookSet;
         if (parametersAreValid) {
             DAOFactory daoObjectFactory = DAOFactory.getInstance();
@@ -52,35 +50,5 @@ public class BookServiceImpl implements EntityService<Book> {
         }
         return bookSet;
    }
-
-   //проверить на null
-   // попробовать передалать в цикле
-   private boolean validateEntityParameters(Book book){
-        return book.getAuthor().matches(ServiceConstant.AUTHOR_PATTERN) &&
-                book.getTitle().matches(ServiceConstant.TITLE_PATTERN) &&
-                book.getYear().matches(ServiceConstant.YEAR_PATTERN);
-   }
-
-        //author$%$pushkin                - request parameters
-       private boolean validateSearchRequestParameters(SearchRequest searchRequestObject){
-       String parameterName = searchRequestObject.getRequestParameters()
-                                .split(ServiceConstant.DELIMITER,2)[0];
-       String parameterValue = searchRequestObject.getRequestParameters()
-                                .split(ServiceConstant.DELIMITER,2)[1];
-       return validate(parameterName,parameterValue);
-       }
-
-
-    private boolean validate (String parameterName, String parameterValue){
-        String pattern = getPattern(parameterName);
-        return parameterValue.matches(pattern);
-    }
-
-    private String getPattern (String parameterName){
-        PatternRepository PatternRepositoryObject = PatternRepository.getInstance();
-        Map<Enumeration, String> patternRepository = PatternRepositoryObject.getPatternRepository();
-        String pattern = patternRepository.get(EntityParameterName.valueOf(parameterName));
-        return pattern;
-    }
 
 }
