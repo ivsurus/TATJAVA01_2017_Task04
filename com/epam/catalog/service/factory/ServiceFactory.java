@@ -17,7 +17,7 @@ public final class ServiceFactory {
     private final EntityService<Disk> diskService = new DiskServiceImpl();
     private final EntityService<Movie> movieService = new MovieServiceImpl();
 
-    //singleton
+
     private ServiceFactory(){}
 
 

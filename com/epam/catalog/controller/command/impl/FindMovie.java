@@ -25,7 +25,6 @@ public class FindMovie implements Command {
             movieSet =  movieService.findEntity(searchRequestObject);
         } catch (ServiceException e){
             return ControllerConstant.UNSUCCESSFUL_OPERATION;
-            //log
         }
         return createResponseForUser(movieSet);
     }
@@ -41,10 +40,6 @@ public class FindMovie implements Command {
         return builder.toString();
     }
 
-    //"find_book$%$author$%$pushkin"  - all request
-    //author$%$pushkin                - request parameters
-
-    //сделать методом бина или сервисным методом
     private SearchRequest initParameters (SearchRequest searchRequestObject, String request){
         searchRequestObject.setRequestParameters(request.split(ControllerConstant.DELIMITER,2)[1]);
         return searchRequestObject;

@@ -1,4 +1,4 @@
-package com.epam.catalog.dao.connection_pool;
+package com.epam.catalog.dao.exeption;
 
 
 public class ConnectionPoolException extends Exception {

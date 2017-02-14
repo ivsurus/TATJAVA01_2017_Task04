@@ -17,7 +17,7 @@ public final class DAOFactory {
     private final EntityDAO<Movie> txtMovieDAOImpl = new SqlMovieDAO();
     private final EntityDAO<Disk> txtDiskDAOImpl = new SqlDiskDAO();
 
-    //singleton
+
     private DAOFactory(){}
 
 

@@ -28,7 +28,6 @@ public class BookServiceImpl implements EntityService<Book> {
             }
         } else {
             throw new ServiceException(ServiceConstant.INVALID_PARAMETERS);
-            // log
         }
     }
 
@@ -46,7 +45,6 @@ public class BookServiceImpl implements EntityService<Book> {
             }
         } else {
             throw new ServiceException(ServiceConstant.INVALID_PARAMETERS);
-            //log
         }
         return bookSet;
    }

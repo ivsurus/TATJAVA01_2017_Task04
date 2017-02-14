@@ -5,6 +5,7 @@ import com.epam.catalog.bean.SearchRequest;
 import com.epam.catalog.dao.EntityDAO;
 import com.epam.catalog.dao.exeption.DAOException;
 import com.epam.catalog.dao.pool.ConnectionPool;
+import com.epam.catalog.dao.exeption.ConnectionPoolException;
 import com.epam.catalog.dao.util.DAOConstant;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,26 +25,28 @@ public class SqlBookDAO implements EntityDAO<Book> {
 
     @Override
     public void addEntity(Book book) throws DAOException {
-        ConnectionPool pool = ConnectionPool.getInstance();
-        Connection connection = pool.getConnection();
+
         try {
+            ConnectionPool pool = ConnectionPool.getInstance();
+            Connection connection = pool.getConnection();
             writeToDataBase(book,connection);
             pool.returnConnection(connection);
-        } catch  (SQLException e) {
+        } catch  (SQLException | ConnectionPoolException e) {
             throw new DAOException();
         }
     }
 
     @Override
     public Set<Book> findEntity(SearchRequest searchRequestObject) throws DAOException {
-        ConnectionPool pool = ConnectionPool.getInstance();
-        Connection connection = pool.getConnection();
+
         ResultSet resultSet;
         try {
+            ConnectionPool pool = ConnectionPool.getInstance();
+            Connection connection = pool.getConnection();
             resultSet = findInDataBase(searchRequestObject,connection);
             pool.returnConnection(connection);
             return createBookSet(resultSet);
-        } catch (SQLException e) {
+        } catch (SQLException | ConnectionPoolException e) {
             throw new DAOException(e);
         }
     }

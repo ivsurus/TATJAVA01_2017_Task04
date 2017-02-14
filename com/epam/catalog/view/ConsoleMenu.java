@@ -10,76 +10,27 @@ import java.io.InputStreamReader;
 public class ConsoleMenu {
 
 
+    private final static String INSTRUCTIONS ="Input any of the following commands to" +
+            " add the news to the catalog:\n" +
+            "1.about book: add%_%book%_%author%_%title%_%genre%_%year\n"+
+            "2.about disk: add%_%disk%_%price%_%title%_%genre%_%year\n"+
+            "3.about movie: add%_%movie%_%producer%_%title%_%genre%_%year\n\n"+
+            "Input any of the following commands to find the news in the catalog:\n" +
+            "1.about book: find%_%book%_%parameterName(author/title/genre/year)%_%parameterValue\n"+
+            "2.about disk: find%_%disk%_%parameterName(price/title/genre/year)%_%parameterValue\n"+
+            "3.about movie: find%_%movie%_%parameterName(producer/title/genre/year)%_%parameterValue\n";
 
-    private final String MESSAGE_1 = "Enter a command: (add find)";
-    private final String MESSAGE_2 = "Enter a category: (book disk movie)";
-    private final String MESSAGE_3 = "Enter an author:";
-    private final String MESSAGE_4 = "Enter a title :";
-    private final String MESSAGE_5 = "Enter a genre:";
-    private final String MESSAGE_5_5 = "Enter a year:";
-    private final String MESSAGE_6 = "Enter a criterion for a search: (author title year)";
-    private final String MESSAGE_7 = "Enter a parameterValue: ";
-    private final String COMMAND_DELIMITER = "_";
-    private final String DELIMITER = "%_%";
-    private final String TITLE = "TITLE";
-    private final String AUTHOR = "AUTHOR";
-    private final String YEAR = "YEAR";
     private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    private StringBuilder builder;
+
     private Controller controller = new Controller();
 
 
-
-
     public void start(){
-
-        System.out.println(controller.executeTask(readUserEntityToAdd()));
-       //System.out.println(controller.executeTask(readUserEntityToFind()));
+        System.out.println(INSTRUCTIONS);
+        System.out.println(controller.executeTask(readUserInput()));
+        controller.destroy();
     }
 
-    private String readUserEntityToAdd(){
-        builder = new StringBuilder();
-        System.out.println(MESSAGE_1);
-        builder.append(readUserInput());
-        builder.append(COMMAND_DELIMITER);
-        System.out.println(MESSAGE_2);
-        builder.append(readUserInput());
-        builder.append(DELIMITER);
-        System.out.println(MESSAGE_3);
-        builder.append(readUserInput());
-        builder.append(DELIMITER);
-        System.out.println(MESSAGE_4);
-        builder.append(readUserInput());
-        builder.append(DELIMITER);
-        System.out.println(MESSAGE_5);
-        builder.append(readUserInput());
-        builder.append(DELIMITER);
-        System.out.println(MESSAGE_5_5);
-        builder.append(readUserInput());
-        return builder.toString();
-
-    }
-
-    private String readUserEntityToFind(){
-        builder = new StringBuilder();
-        System.out.println(MESSAGE_1);
-        builder.append(readUserInput());
-        builder.append(COMMAND_DELIMITER);
-        System.out.println(MESSAGE_2);
-        builder.append(readUserInput());
-        builder.append(DELIMITER);
-        System.out.println(MESSAGE_6);
-        builder.append(readUserInput());
-        builder.append(DELIMITER);
-        System.out.println(MESSAGE_7);
-        builder.append(readUserInput());
-        System.out.println(builder.toString());
-        return builder.toString();
-    }
-
-
-
-    //работаем только в upperCase
     private String readUserInput(){
        String input = "";
         try {

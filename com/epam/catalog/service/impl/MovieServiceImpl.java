@@ -27,7 +27,6 @@ public class MovieServiceImpl implements EntityService<Movie> {
             }
         } else {
             throw new ServiceException(ServiceConstant.INVALID_PARAMETERS);
-            // log
         }
     }
 
@@ -45,7 +44,6 @@ public class MovieServiceImpl implements EntityService<Movie> {
             }
         } else {
             throw new ServiceException(ServiceConstant.INVALID_PARAMETERS);
-            //log
         }
         return movieSet;
     }

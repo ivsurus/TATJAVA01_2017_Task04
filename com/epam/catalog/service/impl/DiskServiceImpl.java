@@ -27,7 +27,6 @@ public class DiskServiceImpl implements EntityService<Disk> {
             }
         } else {
             throw new ServiceException(ServiceConstant.INVALID_PARAMETERS);
-            // log
         }
     }
 
@@ -45,7 +44,6 @@ public class DiskServiceImpl implements EntityService<Disk> {
             }
         } else {
             throw new ServiceException(ServiceConstant.INVALID_PARAMETERS);
-            //log
         }
         return diskSet;
     }

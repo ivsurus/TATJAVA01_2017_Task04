@@ -25,7 +25,6 @@ public class FindDisk implements Command{
            diskSet =  diskService.findEntity(searchRequestObject);
         } catch (ServiceException e){
             return ControllerConstant.UNSUCCESSFUL_OPERATION;
-            //log
         }
         return createResponseForUser(diskSet);
     }
@@ -41,9 +40,6 @@ public class FindDisk implements Command{
         return builder.toString();
     }
 
-    //"find_book$%$author$%$pushkin"  - all request
-    //author$%$pushkin                - request parameters
-    //сделать методом бина или сервисным методом
     private SearchRequest initParameters (SearchRequest searchRequestObject, String request){
         searchRequestObject.setRequestParameters(request.split(ControllerConstant.DELIMITER,2)[1]);
         return searchRequestObject;

@@ -2,8 +2,7 @@ package com.epam.catalog.service.util;
 
 
 public final class ServiceConstant {
-    ///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    //найти паттерны лучше
+
     public final static String TITLE_PATTERN = "[0-9A-Za-zА-Яа-яЁё]{1,30}[ ]{0,1}[A-Za-zА-Яа-яЁё-]{0,20}";
     public final static String AUTHOR_PATTERN = "[A-Za-zА-Яа-яЁё-]{1,20}[ ]{0,1}[A-Za-zА-Яа-яЁё-]{0,20}";
     public final static String YEAR_PATTERN = "^[12][0-9]{3}$"; //Years from 1000 to 2999
