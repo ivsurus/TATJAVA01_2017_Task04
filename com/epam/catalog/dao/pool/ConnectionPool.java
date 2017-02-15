@@ -85,12 +85,13 @@ public class ConnectionPool {
     }
 
 
-    public void cleanUp() throws DAOException {
+    public void cleanUp() throws ConnectionPoolException {
         giveConnection = new AtomicBoolean(false);
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {
-            throw new DAOException("InterruptedException occurred during connection pool cleaning");
+            throw new ConnectionPoolException
+                    ("InterruptedException occurred during connection pool cleaning",e);
         }
         Iterator<Connection> iterator = pool.iterator();
         while (iterator.hasNext()) {
@@ -98,7 +99,8 @@ public class ConnectionPool {
             try {
                 connection.close();
             } catch (SQLException e) {
-                //LOG.error("Exception occurred during connection pool cleaning");
+                throw new ConnectionPoolException
+                ("SQLException occurred during connection pool cleaning",e);
             }
             iterator.remove();
         }

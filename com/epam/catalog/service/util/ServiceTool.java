@@ -4,7 +4,11 @@ import com.epam.catalog.bean.Book;
 import com.epam.catalog.bean.Disk;
 import com.epam.catalog.bean.Movie;
 import com.epam.catalog.bean.SearchRequest;
+import com.epam.catalog.dao.exeption.DAOException;
+import com.epam.catalog.dao.util.DAOTool;
 import com.epam.catalog.service.EntityParameterName;
+import com.epam.catalog.service.exeption.ServiceException;
+
 import java.util.Enumeration;
 import java.util.Map;
 
@@ -49,5 +53,13 @@ public class ServiceTool {
                 book.getTitle().matches(ServiceConstant.TITLE_PATTERN) &&
                 book.getGenre().matches(ServiceConstant.GENRE_PATTERN)&&
                 book.getYear().matches(ServiceConstant.YEAR_PATTERN);
+    }
+
+    public static void destroy() throws ServiceException {
+        try {
+            DAOTool.destroy();
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
     }
 }

@@ -2,6 +2,8 @@ package com.epam.catalog.controller;
 
 import com.epam.catalog.controller.command.Command;
 import com.epam.catalog.controller.util.ControllerConstant;
+import com.epam.catalog.service.exeption.ServiceException;
+import com.epam.catalog.service.util.ServiceTool;
 
 public final class Controller {
 
@@ -16,7 +18,13 @@ public final class Controller {
         response = executionCommand.execute(request);
         return response;
     }
-    public void destroy () {
-     //   connPool.cleanUp();
+
+    public String destroy () {
+        try {
+            ServiceTool.destroy();
+            return ControllerConstant.SUCCESSFUL_DESTROY;
+        } catch (ServiceException e) {
+            return ControllerConstant.UNSUCCESSFUL_DESTROY;
+        }
     }
 }

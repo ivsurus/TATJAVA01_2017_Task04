@@ -28,7 +28,7 @@ public class ConsoleMenu {
     public void start(){
         System.out.println(INSTRUCTIONS);
         System.out.println(controller.executeTask(readUserInput()));
-        controller.destroy();
+        System.out.println(controller.destroy());
     }
 
     private String readUserInput(){
