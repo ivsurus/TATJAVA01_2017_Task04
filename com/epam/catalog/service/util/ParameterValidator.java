@@ -35,7 +35,7 @@ public class ParameterValidator {
 
         String[]parameter = searchRequestObject.getRequestParameters()
                 .split(ServiceConstant.DELIMITER);
-        
+
         if (parameter.length!= 2 ){
             throw new ServiceException("Incorrect number of parameters");
         }

@@ -23,6 +23,8 @@ public class AddDisk implements Command{
             diskService.addEntity(disk);
         } catch (ServiceException e){
             return ControllerConstant.UNSUCCESSFUL_OPERATION;
+        } catch (Exception e){
+            return ControllerConstant.UNSUCCESSFUL_OPERATION;
         }
         return ControllerConstant.SUCCESSFUL_OPERATION;
     }

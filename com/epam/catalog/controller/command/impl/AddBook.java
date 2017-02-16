@@ -21,6 +21,8 @@ public class AddBook implements Command {
             bookService.addEntity(book);
         } catch (ServiceException e){
             return ControllerConstant.UNSUCCESSFUL_OPERATION;
+        } catch (Exception e){
+            return ControllerConstant.UNSUCCESSFUL_OPERATION;
         }
         return ControllerConstant.SUCCESSFUL_OPERATION;
     }

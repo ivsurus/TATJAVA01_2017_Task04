@@ -2,6 +2,7 @@ package com.epam.catalog.controller.command.impl;
 
 import com.epam.catalog.bean.Book;
 import com.epam.catalog.bean.SearchRequest;
+import com.epam.catalog.bean.parameter.EntityParameterName;
 import com.epam.catalog.controller.util.ControllerConstant;
 import com.epam.catalog.controller.command.Command;
 import com.epam.catalog.service.EntityService;
@@ -26,6 +27,8 @@ public class FindBook implements Command {
             bookSet =  bookService.findEntity(searchRequestObject);
         } catch (ServiceException e){
             return ControllerConstant.UNSUCCESSFUL_OPERATION;
+        } catch (Exception e){
+            return ControllerConstant.UNSUCCESSFUL_OPERATION;
         }
         return createResponseForUser(bookSet);
     }
@@ -33,10 +36,10 @@ public class FindBook implements Command {
     private String createResponseForUser(Set<Book> bookSet){
         StringBuilder builder = new StringBuilder();
         for (Book book: bookSet){
-            builder.append(ControllerConstant.AUTHOR + book.getAuthor()+"\n");
-            builder.append(ControllerConstant.TITLE + book.getTitle()+"\n");
-            builder.append(ControllerConstant.GENRE + book.getGenre()+"\n");
-            builder.append(ControllerConstant.YEAR + book.getYear()+"\n\n");
+            builder.append(EntityParameterName.AUTHOR + ": " + book.getAuthor()+"\n");
+            builder.append(EntityParameterName.TITLE + ": " + book.getTitle()+"\n");
+            builder.append(EntityParameterName.GENRE + ": " + book.getGenre()+"\n");
+            builder.append(EntityParameterName.YEAR + ": " + book.getYear()+"\n\n");
         }
         return builder.toString();
     }

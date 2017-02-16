@@ -3,6 +3,7 @@ package com.epam.catalog.controller.command.impl;
 
 import com.epam.catalog.bean.Disk;
 import com.epam.catalog.bean.SearchRequest;
+import com.epam.catalog.bean.parameter.EntityParameterName;
 import com.epam.catalog.controller.util.ControllerConstant;
 import com.epam.catalog.controller.command.Command;
 import com.epam.catalog.service.EntityService;
@@ -25,6 +26,8 @@ public class FindDisk implements Command{
            diskSet =  diskService.findEntity(searchRequestObject);
         } catch (ServiceException e){
             return ControllerConstant.UNSUCCESSFUL_OPERATION;
+        } catch (Exception e){
+            return ControllerConstant.UNSUCCESSFUL_OPERATION;
         }
         return createResponseForUser(diskSet);
     }
@@ -32,10 +35,10 @@ public class FindDisk implements Command{
     private String createResponseForUser(Set<Disk> diskSet){
         StringBuilder builder = new StringBuilder();
         for (Disk disk: diskSet){
-            builder.append(ControllerConstant.PRICE + disk.getPrice()+"\n");
-            builder.append(ControllerConstant.TITLE + disk.getTitle()+"\n");
-            builder.append(ControllerConstant.GENRE + disk.getGenre()+"\n");
-            builder.append(ControllerConstant.YEAR + disk.getYear()+"\n\n");
+            builder.append(EntityParameterName.PRICE + ": " + disk.getPrice()+"\n");
+            builder.append(EntityParameterName.TITLE + ": " + disk.getTitle()+"\n");
+            builder.append(EntityParameterName.GENRE + ": " + disk.getGenre()+"\n");
+            builder.append(EntityParameterName.YEAR + ": " + disk.getYear()+"\n\n");
         }
         return builder.toString();
     }

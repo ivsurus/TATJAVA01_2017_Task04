@@ -3,6 +3,7 @@ package com.epam.catalog.controller.command.impl;
 
 import com.epam.catalog.bean.Movie;
 import com.epam.catalog.bean.SearchRequest;
+import com.epam.catalog.bean.parameter.EntityParameterName;
 import com.epam.catalog.controller.util.ControllerConstant;
 import com.epam.catalog.controller.command.Command;
 import com.epam.catalog.service.EntityService;
@@ -25,6 +26,8 @@ public class FindMovie implements Command {
             movieSet =  movieService.findEntity(searchRequestObject);
         } catch (ServiceException e){
             return ControllerConstant.UNSUCCESSFUL_OPERATION;
+        } catch (Exception e){
+            return ControllerConstant.UNSUCCESSFUL_OPERATION;
         }
         return createResponseForUser(movieSet);
     }
@@ -32,10 +35,10 @@ public class FindMovie implements Command {
     private String createResponseForUser(Set<Movie> movieSet){
         StringBuilder builder = new StringBuilder();
         for (Movie movie: movieSet){
-            builder.append(ControllerConstant.PRODUCER + movie.getProducer()+"\n");
-            builder.append(ControllerConstant.TITLE + movie.getTitle()+"\n");
-            builder.append(ControllerConstant.GENRE + movie.getGenre()+"\n");
-            builder.append(ControllerConstant.YEAR + movie.getYear()+"\n\n");
+            builder.append(EntityParameterName.PRODUCER + ": " + movie.getProducer()+"\n");
+            builder.append(EntityParameterName.TITLE + ": " + movie.getTitle()+"\n");
+            builder.append(EntityParameterName.GENRE + ": " + movie.getGenre()+"\n");
+            builder.append(EntityParameterName.YEAR + ": " + movie.getYear()+"\n\n");
         }
         return builder.toString();
     }
