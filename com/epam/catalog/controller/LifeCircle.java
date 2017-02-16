@@ -6,8 +6,7 @@ package com.epam.catalog.controller;
   * destroy() should be called in the end of life circle of Controller object
  */
 
-public interface LifeCircle {
-
-    void init();
+interface LifeCircle {
+    String init();
     String destroy();
 }

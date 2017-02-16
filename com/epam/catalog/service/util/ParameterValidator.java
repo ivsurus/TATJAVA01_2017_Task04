@@ -29,6 +29,8 @@ public class ParameterValidator {
                 ServiceConstant.PRICE_PATTERN);
     }
 
+    private ParameterValidator(){}
+
     public static boolean validateSearchRequestParameters
             (SearchRequest searchRequestObject) throws ServiceException {
 

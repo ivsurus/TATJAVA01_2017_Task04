@@ -3,7 +3,6 @@ package com.epam.catalog.controller;
 import com.epam.catalog.controller.command.Command;
 import com.epam.catalog.controller.constant.ControllerConstant;
 import com.epam.catalog.service.exeption.ServiceException;
-import com.epam.catalog.service.util.ParameterValidator;
 import com.epam.catalog.service.util.ServiceTool;
 
 public final class Controller implements LifeCircle{
@@ -21,12 +20,13 @@ public final class Controller implements LifeCircle{
     }
 
     @Override
-    public void init() {
+    public String init() {
         try {
             ServiceTool.init();
         } catch (ServiceException e) {
-            //////log
+           return ControllerConstant.UNSUCCESSFUL_OPERATION;
         }
+        return ControllerConstant.START_MESSAGE;
     }
 
     @Override
