@@ -1,4 +1,4 @@
-package com.epam.catalog.service;
+package com.epam.catalog.bean.parameter;
 
 
 public enum  EntityParameterName {

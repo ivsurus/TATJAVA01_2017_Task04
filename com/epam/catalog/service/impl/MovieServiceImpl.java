@@ -8,7 +8,7 @@ import com.epam.catalog.dao.factory.DAOFactory;
 import com.epam.catalog.service.EntityService;
 import com.epam.catalog.service.exeption.ServiceException;
 import com.epam.catalog.service.util.ServiceConstant;
-import com.epam.catalog.service.util.ServiceTool;
+import com.epam.catalog.service.util.ParameterValidator;
 import java.util.Set;
 
 
@@ -16,7 +16,7 @@ public class MovieServiceImpl implements EntityService<Movie> {
 
     @Override
     public void addEntity(Movie movie) throws ServiceException {
-        boolean parametersAreValid = ServiceTool.validateEntityParameters(movie);
+        boolean parametersAreValid = ParameterValidator.validateEntityParameters(movie);
         if (parametersAreValid) {
             DAOFactory daoObjectFactory = DAOFactory.getInstance();
             EntityDAO<Movie> movieDAO = daoObjectFactory.getMovieDAO();
@@ -32,7 +32,7 @@ public class MovieServiceImpl implements EntityService<Movie> {
 
     @Override
     public Set<Movie> findEntity(SearchRequest searchRequestObject) throws ServiceException {
-        boolean parametersAreValid = ServiceTool.validateSearchRequestParameters(searchRequestObject);
+        boolean parametersAreValid = ParameterValidator.validateSearchRequestParameters(searchRequestObject);
         Set<Movie> movieSet;
         if (parametersAreValid) {
             DAOFactory daoObjectFactory = DAOFactory.getInstance();

@@ -2,30 +2,44 @@ package com.epam.catalog.dao.impl;
 
 import com.epam.catalog.bean.Book;
 import com.epam.catalog.bean.SearchRequest;
+import com.epam.catalog.bean.parameter.EntityParameterName;
 import com.epam.catalog.dao.EntityDAO;
 import com.epam.catalog.dao.exeption.DAOException;
 import com.epam.catalog.dao.pool.ConnectionPool;
-import com.epam.catalog.dao.exeption.ConnectionPoolException;
+import com.epam.catalog.dao.pool.exeption.ConnectionPoolException;
 import com.epam.catalog.dao.util.DAOConstant;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
+
 
 
 public class SqlBookDAO implements EntityDAO<Book> {
 
-    private final static String INSERT_TO_BOOK_TABLE =
-            "INSERT INTO catalog.book (author,title,genre,year) VALUES (?,?,?,?);";
-    private final static String SELECT_FROM_BOOK_TABLE =
-            "SELECT * FROM catalog.book WHERE  = ?;";
-    private final static int PARAMETER_INSERT_INDEX_FOR_SELECT =33;
+
+    private final static String INSERT_TO_BOOK_TABLE = "INSERT INTO catalog.book (author,title,genre,year) VALUES (?,?,?,?);";
+    private final static String SELECT_FROM_BOOK_TABLE_BY_AUTHOR = "SELECT * FROM catalog.book WHERE author = ?;";
+    private final static String SELECT_FROM_BOOK_TABLE_BY_TITLE = "SELECT * FROM catalog.book WHERE title = ?;";
+    private final static String SELECT_FROM_BOOK_TABLE_BY_GENRE = "SELECT * FROM catalog.book WHERE genre = ?;";
+    private final static String SELECT_FROM_BOOK_TABLE_BY_YEAR = "SELECT * FROM catalog.book WHERE year = ?;";
+
+    private static Map <String,String> bookQueryRepository = new HashMap<>();
+
+    static {
+        bookQueryRepository.put(EntityParameterName.AUTHOR.toString(), SELECT_FROM_BOOK_TABLE_BY_AUTHOR);
+        bookQueryRepository.put(EntityParameterName.TITLE.toString(), SELECT_FROM_BOOK_TABLE_BY_TITLE);
+        bookQueryRepository.put(EntityParameterName.GENRE.toString(), SELECT_FROM_BOOK_TABLE_BY_GENRE);
+        bookQueryRepository.put(EntityParameterName.YEAR.toString(), SELECT_FROM_BOOK_TABLE_BY_YEAR);
+    }
+
 
     @Override
     public void addEntity(Book book) throws DAOException {
-
         try {
             ConnectionPool pool = ConnectionPool.getInstance();
             Connection connection = pool.getConnection();
@@ -43,7 +57,8 @@ public class SqlBookDAO implements EntityDAO<Book> {
         try {
             ConnectionPool pool = ConnectionPool.getInstance();
             Connection connection = pool.getConnection();
-            resultSet = findInDataBase(searchRequestObject,connection);
+            String[] searchParameter = getSearchParameter(searchRequestObject);
+            resultSet = findInDataBase(searchParameter,connection);
             pool.returnConnection(connection);
             return createBookSet(resultSet);
         } catch (SQLException | ConnectionPoolException e) {
@@ -59,30 +74,22 @@ public class SqlBookDAO implements EntityDAO<Book> {
         ps.setString(4, book.getYear());
         ps.executeUpdate();
     }
-    private ResultSet findInDataBase(SearchRequest searchRequestObject,
-                                Connection connection) throws SQLException {
-        String sql = getQuery(searchRequestObject);
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1, getSearchParameterValue(searchRequestObject));
+
+    private ResultSet findInDataBase(String[] searchParameter,
+                                     Connection connection) throws SQLException {
+        String sqlQuery = bookQueryRepository.get(searchParameter[0]);
+        PreparedStatement ps = connection.prepareStatement(sqlQuery);
+        ps.setString(1, searchParameter[1]);
         return ps.executeQuery();
     }
 
-    private String getSearchParameterName(SearchRequest searchRequestObject){
+
+    private String[] getSearchParameter (SearchRequest searchRequestObject){
         String request = searchRequestObject.getRequestParameters();
-        return request.split(DAOConstant.DELIMITER)[0];
+        return request.split(DAOConstant.DELIMITER);
     }
 
-    private String getSearchParameterValue(SearchRequest searchRequestObject){
-        String request = searchRequestObject.getRequestParameters();
-        return request.split(DAOConstant.DELIMITER)[1];
-    }
 
-    private String getQuery(SearchRequest searchRequestObject){
-        StringBuilder builder = new StringBuilder(SELECT_FROM_BOOK_TABLE);
-        builder.insert(PARAMETER_INSERT_INDEX_FOR_SELECT,
-                getSearchParameterName(searchRequestObject));
-        return builder.toString();
-    }
 
     private Set<Book> createBookSet (ResultSet resultSet) throws SQLException {
         Set<Book> bookSet = new HashSet<>();

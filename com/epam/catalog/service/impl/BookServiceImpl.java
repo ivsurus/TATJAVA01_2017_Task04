@@ -8,7 +8,7 @@ import com.epam.catalog.dao.factory.DAOFactory;
 import com.epam.catalog.service.EntityService;
 import com.epam.catalog.service.exeption.ServiceException;
 import com.epam.catalog.service.util.ServiceConstant;
-import com.epam.catalog.service.util.ServiceTool;
+import com.epam.catalog.service.util.ParameterValidator;
 
 import java.util.*;
 
@@ -17,7 +17,7 @@ public class BookServiceImpl implements EntityService<Book> {
 
     @Override
     public void addEntity(Book book) throws ServiceException {
-        boolean parametersAreValid = ServiceTool.validateEntityParameters(book);
+        boolean parametersAreValid = ParameterValidator.validateEntityParameters(book);
         if (parametersAreValid) {
             DAOFactory daoObjectFactory = DAOFactory.getInstance();
             EntityDAO<Book> bookDAO = daoObjectFactory.getBookDAO();
@@ -33,7 +33,7 @@ public class BookServiceImpl implements EntityService<Book> {
 
     @Override
     public Set<Book> findEntity(SearchRequest searchRequestObject) throws ServiceException {
-        boolean parametersAreValid = ServiceTool.validateSearchRequestParameters(searchRequestObject);
+        boolean parametersAreValid = ParameterValidator.validateSearchRequestParameters(searchRequestObject);
         Set<Book> bookSet;
         if (parametersAreValid) {
             DAOFactory daoObjectFactory = DAOFactory.getInstance();

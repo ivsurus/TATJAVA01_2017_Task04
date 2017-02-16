@@ -3,7 +3,7 @@ package com.epam.catalog.controller;
 import com.epam.catalog.controller.command.Command;
 import com.epam.catalog.controller.util.ControllerConstant;
 import com.epam.catalog.service.exeption.ServiceException;
-import com.epam.catalog.service.util.ServiceTool;
+import com.epam.catalog.service.util.ParameterValidator;
 
 public final class Controller {
 
@@ -21,7 +21,7 @@ public final class Controller {
 
     public String destroy () {
         try {
-            ServiceTool.destroy();
+            ParameterValidator.destroy();
             return ControllerConstant.SUCCESSFUL_DESTROY;
         } catch (ServiceException e) {
             return ControllerConstant.UNSUCCESSFUL_DESTROY;

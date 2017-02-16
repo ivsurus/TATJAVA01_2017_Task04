@@ -8,7 +8,7 @@ import com.epam.catalog.dao.factory.DAOFactory;
 import com.epam.catalog.service.EntityService;
 import com.epam.catalog.service.exeption.ServiceException;
 import com.epam.catalog.service.util.ServiceConstant;
-import com.epam.catalog.service.util.ServiceTool;
+import com.epam.catalog.service.util.ParameterValidator;
 import java.util.Set;
 
 public class DiskServiceImpl implements EntityService<Disk> {
@@ -16,7 +16,7 @@ public class DiskServiceImpl implements EntityService<Disk> {
 
     @Override
     public void addEntity(Disk disk) throws ServiceException {
-        boolean parametersAreValid = ServiceTool.validateEntityParameters(disk);
+        boolean parametersAreValid = ParameterValidator.validateEntityParameters(disk);
         if (parametersAreValid) {
             DAOFactory daoObjectFactory = DAOFactory.getInstance();
             EntityDAO<Disk> diskDAO = daoObjectFactory.getDiskDAO();
@@ -32,7 +32,7 @@ public class DiskServiceImpl implements EntityService<Disk> {
 
     @Override
     public Set<Disk> findEntity(SearchRequest searchRequestObject) throws ServiceException {
-        boolean parametersAreValid = ServiceTool.validateSearchRequestParameters(searchRequestObject);
+        boolean parametersAreValid = ParameterValidator.validateSearchRequestParameters(searchRequestObject);
         Set<Disk> diskSet;
         if (parametersAreValid) {
             DAOFactory daoObjectFactory = DAOFactory.getInstance();

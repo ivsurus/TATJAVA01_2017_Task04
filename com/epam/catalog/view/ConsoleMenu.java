@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 public class ConsoleMenu {
 
 
-    private final static String INSTRUCTIONS ="Input any of the following commands to" +
+    private final static String COMMAND_HELPER ="Input any of the following commands to" +
             " add the news to the catalog:\n" +
             "1.about book: add%_%book%_%author%_%title%_%genre%_%year\n"+
             "2.about disk: add%_%disk%_%price%_%title%_%genre%_%year\n"+
@@ -26,7 +26,7 @@ public class ConsoleMenu {
 
 
     public void start(){
-        System.out.println(INSTRUCTIONS);
+        System.out.println(COMMAND_HELPER);
         System.out.println(controller.executeTask(readUserInput()));
         System.out.println(controller.destroy());
     }

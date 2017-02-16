@@ -2,7 +2,7 @@ package com.epam.catalog.dao.pool;
 
 
 
-import com.epam.catalog.dao.exeption.ConnectionPoolException;
+import com.epam.catalog.dao.pool.exeption.ConnectionPoolException;
 import com.epam.catalog.dao.exeption.DAOException;
 import com.epam.catalog.dao.util.DAOConstant;
 
