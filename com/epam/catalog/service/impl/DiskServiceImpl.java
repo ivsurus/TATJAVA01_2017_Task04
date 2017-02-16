@@ -7,7 +7,7 @@ import com.epam.catalog.dao.exeption.DAOException;
 import com.epam.catalog.dao.factory.DAOFactory;
 import com.epam.catalog.service.EntityService;
 import com.epam.catalog.service.exeption.ServiceException;
-import com.epam.catalog.service.util.ServiceConstant;
+import com.epam.catalog.service.constant.ServiceConstant;
 import com.epam.catalog.service.util.ParameterValidator;
 import java.util.Set;
 

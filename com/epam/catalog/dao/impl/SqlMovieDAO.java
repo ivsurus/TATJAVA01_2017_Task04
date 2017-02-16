@@ -8,7 +8,7 @@ import com.epam.catalog.dao.EntityDAO;
 import com.epam.catalog.dao.exeption.DAOException;
 import com.epam.catalog.dao.pool.ConnectionPool;
 import com.epam.catalog.dao.pool.exeption.ConnectionPoolException;
-import com.epam.catalog.dao.util.DAOConstant;
+import com.epam.catalog.dao.constant.DAOConstant;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,19 +22,28 @@ import java.util.Set;
 
 public class SqlMovieDAO implements EntityDAO<Movie> {
 
-    private final static String INSERT_TO_MOVIE_TABLE = "INSERT INTO catalog.movie (producer,title,genre,year) VALUES (?,?,?,?);";
-    private final static String SELECT_FROM_MOVIE_TABLE_BY_PRODUCER = "SELECT * FROM catalog.movie WHERE producer = ?;";
-    private final static String SELECT_FROM_MOVIE_TABLE_BY_TITLE = "SELECT * FROM catalog.movie WHERE title = ?;";
-    private final static String SELECT_FROM_MOVIE_TABLE_BY_GENRE = "SELECT * FROM catalog.movie WHERE genre = ?;";
-    private final static String SELECT_FROM_MOVIE_TABLE_BY_YEAR = "SELECT * FROM catalog.movie WHERE year = ?;";
+    private final static String INSERT_TO_MOVIE_TABLE =
+            "INSERT INTO catalog.movie (producer,title,genre,year) VALUES (?,?,?,?);";
+    private final static String SELECT_FROM_MOVIE_TABLE_BY_PRODUCER =
+            "SELECT * FROM catalog.movie WHERE producer = ?;";
+    private final static String SELECT_FROM_MOVIE_TABLE_BY_TITLE =
+            "SELECT * FROM catalog.movie WHERE title = ?;";
+    private final static String SELECT_FROM_MOVIE_TABLE_BY_GENRE =
+            "SELECT * FROM catalog.movie WHERE genre = ?;";
+    private final static String SELECT_FROM_MOVIE_TABLE_BY_YEAR =
+            "SELECT * FROM catalog.movie WHERE year = ?;";
 
     private static Map<String,String> movieQueryRepository = new HashMap<>();
 
     static {
-        movieQueryRepository.put(EntityParameterName.PRODUCER.toString(), SELECT_FROM_MOVIE_TABLE_BY_PRODUCER);
-        movieQueryRepository.put(EntityParameterName.TITLE.toString(), SELECT_FROM_MOVIE_TABLE_BY_TITLE);
-        movieQueryRepository.put(EntityParameterName.GENRE.toString(), SELECT_FROM_MOVIE_TABLE_BY_GENRE);
-        movieQueryRepository.put(EntityParameterName.YEAR.toString(), SELECT_FROM_MOVIE_TABLE_BY_YEAR);
+        movieQueryRepository.put(EntityParameterName.PRODUCER.toString(),
+                SELECT_FROM_MOVIE_TABLE_BY_PRODUCER);
+        movieQueryRepository.put(EntityParameterName.TITLE.toString(),
+                SELECT_FROM_MOVIE_TABLE_BY_TITLE);
+        movieQueryRepository.put(EntityParameterName.GENRE.toString(),
+                SELECT_FROM_MOVIE_TABLE_BY_GENRE);
+        movieQueryRepository.put(EntityParameterName.YEAR.toString(),
+                SELECT_FROM_MOVIE_TABLE_BY_YEAR);
     }
 
     @Override

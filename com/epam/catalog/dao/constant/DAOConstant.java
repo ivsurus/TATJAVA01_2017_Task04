@@ -1,4 +1,4 @@
-package com.epam.catalog.dao.util;
+package com.epam.catalog.dao.constant;
 
 
 public class DAOConstant {

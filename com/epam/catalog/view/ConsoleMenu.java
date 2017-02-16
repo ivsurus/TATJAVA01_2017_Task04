@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 
 public class ConsoleMenu {
 
-
+    private final static String INVALID_INPUT = "Invalid input";
     private final static String COMMAND_HELPER ="Input any of the following commands to" +
             " add the news to the catalog:\n" +
             "1.about book: add%_%book%_%author%_%title%_%genre%_%year\n"+
@@ -27,6 +27,7 @@ public class ConsoleMenu {
 
     public void start(){
         System.out.println(COMMAND_HELPER);
+        controller.init();
         System.out.println(controller.executeTask(readUserInput()));
         System.out.println(controller.destroy());
     }
@@ -36,7 +37,7 @@ public class ConsoleMenu {
         try {
             input = reader.readLine().toUpperCase();
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println(INVALID_INPUT);
         }
         return input;
     }

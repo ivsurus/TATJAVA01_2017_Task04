@@ -1,11 +1,12 @@
 package com.epam.catalog.controller;
 
 import com.epam.catalog.controller.command.Command;
-import com.epam.catalog.controller.util.ControllerConstant;
+import com.epam.catalog.controller.constant.ControllerConstant;
 import com.epam.catalog.service.exeption.ServiceException;
 import com.epam.catalog.service.util.ParameterValidator;
+import com.epam.catalog.service.util.ServiceTool;
 
-public final class Controller {
+public final class Controller implements LifeCircle{
 
     private final CommandProvider provider = new CommandProvider();
 
@@ -19,12 +20,23 @@ public final class Controller {
         return response;
     }
 
+    @Override
+    public void init() {
+        try {
+            ServiceTool.init();
+        } catch (ServiceException e) {
+            //////log
+        }
+    }
+
+    @Override
     public String destroy () {
         try {
-            ParameterValidator.destroy();
-            return ControllerConstant.SUCCESSFUL_DESTROY;
+            ServiceTool.destroy();
+
         } catch (ServiceException e) {
             return ControllerConstant.UNSUCCESSFUL_DESTROY;
         }
+        return ControllerConstant.SUCCESSFUL_DESTROY;
     }
 }

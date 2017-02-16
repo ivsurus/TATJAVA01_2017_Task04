@@ -1,7 +1,7 @@
-package com.epam.catalog.controller.util;
+package com.epam.catalog.controller.constant;
 
 
-public final class ControllerConstant {
+public class ControllerConstant {
 
     public final static String DELIMITER = "%_%";
     public final static String SUCCESSFUL_OPERATION = " News is successfully added to the catalog";

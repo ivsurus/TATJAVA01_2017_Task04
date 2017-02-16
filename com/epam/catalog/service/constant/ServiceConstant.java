@@ -1,4 +1,4 @@
-package com.epam.catalog.service.util;
+package com.epam.catalog.service.constant;
 
 
 public final class ServiceConstant {

@@ -1,6 +1,7 @@
 package com.epam.catalog.controller;
 
 import com.epam.catalog.controller.command.Command;
+import com.epam.catalog.controller.command.CommandName;
 import com.epam.catalog.controller.command.impl.*;
 import java.util.HashMap;
 import java.util.Map;

@@ -4,8 +4,7 @@ package com.epam.catalog.dao.pool;
 
 import com.epam.catalog.dao.pool.exeption.ConnectionPoolException;
 import com.epam.catalog.dao.exeption.DAOException;
-import com.epam.catalog.dao.util.DAOConstant;
-
+import com.epam.catalog.dao.constant.DAOConstant;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -27,12 +26,11 @@ public class ConnectionPool {
     private ArrayBlockingQueue<Connection> pool;
 
 
-    private ConnectionPool() throws ConnectionPoolException {
-        init();
+    private ConnectionPool() {
     }
 
 
-    private void init() throws ConnectionPoolException {
+    public void init() throws ConnectionPoolException {
         pool = new ArrayBlockingQueue<>(DAOConstant.DEFAULT_POOL_SIZE);
         try {
             Class.forName(DAOConstant.LOCATION_OF_JDBC_DRIVER);

@@ -2,13 +2,13 @@ package com.epam.catalog.controller.command.impl;
 
 
 import com.epam.catalog.bean.Movie;
-import com.epam.catalog.controller.util.ControllerConstant;
+import com.epam.catalog.controller.constant.ControllerConstant;
 import com.epam.catalog.controller.command.Command;
 import com.epam.catalog.service.EntityService;
 import com.epam.catalog.service.exeption.ServiceException;
 import com.epam.catalog.service.factory.ServiceFactory;
 
-public class AddMovie implements Command {
+public final class AddMovie implements Command {
 
 
     @Override

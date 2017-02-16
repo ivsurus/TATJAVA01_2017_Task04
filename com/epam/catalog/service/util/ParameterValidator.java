@@ -4,9 +4,8 @@ import com.epam.catalog.bean.Book;
 import com.epam.catalog.bean.Disk;
 import com.epam.catalog.bean.Movie;
 import com.epam.catalog.bean.SearchRequest;
-import com.epam.catalog.dao.exeption.DAOException;
-import com.epam.catalog.dao.util.DAOTool;
 import com.epam.catalog.bean.parameter.EntityParameterName;
+import com.epam.catalog.service.constant.ServiceConstant;
 import com.epam.catalog.service.exeption.ServiceException;
 import java.util.HashMap;
 import java.util.Map;
@@ -70,16 +69,6 @@ public class ParameterValidator {
     private static boolean validate (String parameterName, String parameterValue){
         String pattern = patternRepository.get(parameterName);
         return parameterValue.matches(pattern);
-    }
-
-
-    //убрать в другой класс
-    public static void destroy() throws ServiceException {
-        try {
-            DAOTool.destroy();
-        } catch (DAOException e) {
-            throw new ServiceException(e);
-        }
     }
 
 }

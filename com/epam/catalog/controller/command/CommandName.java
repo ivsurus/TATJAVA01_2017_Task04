@@ -1,4 +1,4 @@
-package com.epam.catalog.controller;
+package com.epam.catalog.controller.command;
 
 
 public enum  CommandName {

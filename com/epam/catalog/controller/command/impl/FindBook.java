@@ -3,7 +3,7 @@ package com.epam.catalog.controller.command.impl;
 import com.epam.catalog.bean.Book;
 import com.epam.catalog.bean.SearchRequest;
 import com.epam.catalog.bean.parameter.EntityParameterName;
-import com.epam.catalog.controller.util.ControllerConstant;
+import com.epam.catalog.controller.constant.ControllerConstant;
 import com.epam.catalog.controller.command.Command;
 import com.epam.catalog.service.EntityService;
 import com.epam.catalog.service.exeption.ServiceException;
@@ -12,7 +12,7 @@ import com.epam.catalog.service.factory.ServiceFactory;
 import java.util.Set;
 
 
-public class FindBook implements Command {
+public final class  FindBook implements Command {
 
 
     @Override

@@ -8,7 +8,7 @@ import com.epam.catalog.dao.EntityDAO;
 import com.epam.catalog.dao.exeption.DAOException;
 import com.epam.catalog.dao.pool.ConnectionPool;
 import com.epam.catalog.dao.pool.exeption.ConnectionPoolException;
-import com.epam.catalog.dao.util.DAOConstant;
+import com.epam.catalog.dao.constant.DAOConstant;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,19 +22,28 @@ import java.util.Set;
 
 public class SqlDiskDAO implements EntityDAO<Disk>{
 
-    private final static String INSERT_TO_DISK_TABLE = "INSERT INTO catalog.disk (price,title,genre,year) VALUES (?,?,?,?);";
-    private final static String SELECT_FROM_DISK_TABLE_BY_PRICE = "SELECT * FROM catalog.disk WHERE price = ?;";
-    private final static String SELECT_FROM_DISK_TABLE_BY_TITLE = "SELECT * FROM catalog.disk WHERE title = ?;";
-    private final static String SELECT_FROM_DISK_TABLE_BY_GENRE = "SELECT * FROM catalog.disk WHERE genre = ?;";
-    private final static String SELECT_FROM_DISK_TABLE_BY_YEAR = "SELECT * FROM catalog.disk WHERE year = ?;";
+    private final static String INSERT_TO_DISK_TABLE =
+            "INSERT INTO catalog.disk (price,title,genre,year) VALUES (?,?,?,?);";
+    private final static String SELECT_FROM_DISK_TABLE_BY_PRICE =
+            "SELECT * FROM catalog.disk WHERE price = ?;";
+    private final static String SELECT_FROM_DISK_TABLE_BY_TITLE =
+            "SELECT * FROM catalog.disk WHERE title = ?;";
+    private final static String SELECT_FROM_DISK_TABLE_BY_GENRE =
+            "SELECT * FROM catalog.disk WHERE genre = ?;";
+    private final static String SELECT_FROM_DISK_TABLE_BY_YEAR =
+            "SELECT * FROM catalog.disk WHERE year = ?;";
 
     private static Map<String,String> diskQueryRepository = new HashMap<>();
 
     static {
-        diskQueryRepository.put(EntityParameterName.PRICE.toString(), SELECT_FROM_DISK_TABLE_BY_PRICE);
-        diskQueryRepository.put(EntityParameterName.TITLE.toString(), SELECT_FROM_DISK_TABLE_BY_TITLE);
-        diskQueryRepository.put(EntityParameterName.GENRE.toString(), SELECT_FROM_DISK_TABLE_BY_GENRE);
-        diskQueryRepository.put(EntityParameterName.YEAR.toString(), SELECT_FROM_DISK_TABLE_BY_YEAR);
+        diskQueryRepository.put(EntityParameterName.PRICE.toString(),
+                SELECT_FROM_DISK_TABLE_BY_PRICE);
+        diskQueryRepository.put(EntityParameterName.TITLE.toString(),
+                SELECT_FROM_DISK_TABLE_BY_TITLE);
+        diskQueryRepository.put(EntityParameterName.GENRE.toString(),
+                SELECT_FROM_DISK_TABLE_BY_GENRE);
+        diskQueryRepository.put(EntityParameterName.YEAR.toString(),
+                SELECT_FROM_DISK_TABLE_BY_YEAR);
     }
 
     @Override
